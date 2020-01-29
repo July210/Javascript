@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    li {
+        list-style: none;
+        width: 32%;
+        color: white;
+        float: left;
+        height: 55px;
+        text-align: center;
+        padding: 1px;
+    }
+    ul {
+        margin: auto;
+        display: block;
+        width: 240px;
+        height: 200px;
+        padding: 0px;
+    }
+    button {
+        height: 100%;
+        border: none;
+        width: 100%;
+        background: #32abb1;
+    }
+    .fas, .far{
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1; 
+    }
+    
+
+
+
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <ul>
+        <li><button class="option" id = "00"  ></button></li>
+        <li><button class="option" id = "01"  ></button></li>
+        <li><button class="option" id = "02"  ></button></li>
+        <li><button class="option" id = "10"  ></button></li>
+        <li><button class="option" id = "11"  ></button></li>
+        <li><button class="option" id = "12"  ></button></li>
+        <li><button class="option" id = "20"  ></button></li>
+        <li><button class="option" id = "21"  ></button></li>
+        <li><button class="option" id = "22"  ></button></li>
+    </ul>
+
+    <script>
+            var turno = 1;
+            jogo = [[" "," "," "],[" "," "," "],[" "," "," "]];
+            function trocaTurno(){
+                if (turno == 1){
+                    turno = 2;
+                } else {
+                    turno = 1;
+                }
+
+            }
+            function mensagemVitoria(vencedor){
+                alert("Parabéns! O jogador " + vencedor + " venceu!");
+            }
+            function verificaSeVenceu(matrizJogo){
+                if (matrizJogo[0][0] == turno && matrizJogo[0][1]  == turno && matrizJogo[0][2] == turno){
+                    mensagemVitoria(turno);
+                } else if(matrizJogo[1][0] == turno && matrizJogo[1][1]  == turno && matrizJogo[1][2] == turno){
+                    mensagemVitoria(turno);
+                } else if(matrizJogo[2][0] == turno && matrizJogo[2][1]  == turno && matrizJogo[2][2] == turno){
+                    mensagemVitoria(turno);
+                } else if(matrizJogo[0][0] == turno && matrizJogo[1][0]  == turno && matrizJogo[2][0] == turno){
+                    mensagemVitoria(turno);
+                } else if(matrizJogo[0][1] == turno && matrizJogo[1][1]  == turno && matrizJogo[2][1] == turno){
+                    mensagemVitoria(turno);
+                } else if(matrizJogo[0][2] == turno && matrizJogo[1][2]  == turno && matrizJogo[2][2] == turno){
+                    mensagemVitoria(turno);
+                } else if(matrizJogo[0][2] == turno && matrizJogo[1][1]  == turno && matrizJogo[2][0] == turno){
+                    mensagemVitoria(turno);
+                } else if(matrizJogo[0][0] == turno && matrizJogo[1][1]  == turno && matrizJogo[2][2] == turno){
+                    mensagemVitoria(turno);
+                }
+            }
+
+            function verificaJogo(numJogador, localMatriz){
+                linhaColuna = localMatriz.split('');
+                jogo[linhaColuna[0]][linhaColuna[1]] = numJogador;
+                verificaSeVenceu(jogo);
+                if (turno == 1){
+                    return '<i class="fas fa-times"></i>';
+                } else {
+                    return '<i class="far fa-circle"></i>';
+                }
+            }
+    
+            $('.option').click(function(){
+                if (this.innerHTML == "" || this.innerHTML == "none"){
+                    this.innerHTML = verificaJogo(turno, this.id);
+                    trocaTurno();
+                } else { alert("Esse local já foi clicado!")}
+            })
+           
+
+        </script>
+  </body>
+</html>
